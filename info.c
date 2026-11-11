@@ -39,20 +39,29 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // print character array buffers from system_info struct from uname
-    printf("System: %s\n", system_info.sysname);
-    printf("Node: %s\n", system_info.nodename);
-    printf("Release: %s\n", system_info.release);
-    printf("Version: %s\n", system_info.version);
-    printf("Machine: %s\n", system_info.machine);
+    // print character array buffers from system_info struct from uname, make sure they arent NULL 
+    if (system_info.sysname[0] != '\0')
+        printf("System: %s\n", system_info.sysname);
+
+    if (system_info.nodename[0] != '\0')
+        printf("Node: %s\n", system_info.nodename);
+
+    if (system_info.release[0] != '\0')
+        printf("Release: %s\n", system_info.release);
+
+    if (system_info.version[0] != '\0')
+        printf("Version: %s\n", system_info.version);
+
+    if (system_info.machine[0] != '\0')
+        printf("Machine: %s\n", system_info.machine);
 
     // gethostname to get host name, check errors
     if (gethostname(hostname, sizeof(hostname)) == -1) {
         perror("Error: gethostname");
         return 1;
     }
-
-    // print host name back
+    // print host name back, check NULL
+    if (hostname[0] != '\0')
     printf("Hostname: %s\n", hostname);
 
     // get_nprocs to get number of processors
@@ -78,7 +87,7 @@ int main(int argc, char* argv[])
 
         printf("Free memory: %llu bytes\n", free_memory);
     } else {
-        perror("sysinfo");
+        perror("Error: sysinfo");
     }
 
     return 0;

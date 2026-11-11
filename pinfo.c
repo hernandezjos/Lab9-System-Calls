@@ -6,6 +6,8 @@
 * compile: Makefile
 ************************************/
 
+#define _GNU_SOURCE
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -31,13 +33,17 @@ const char *scheduler_name(int policy)
             break;
 
             // sched batch and sched idle only work with <sched.h>
+            #ifdef SCHED_BATCH
         case SCHED_BATCH:
             return "SCHED_BATCH";
             break;
+            #endif
 
+            #ifdef SCHED_IDLE
         case SCHED_IDLE:
             return "SCHED_IDLE";
             break;
+            #endif
 
         default:
             return "Unknown Scheduler";

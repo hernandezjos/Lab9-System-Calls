@@ -74,18 +74,19 @@ int main(int argc, char* argv[])
 
     // Retrieve file information
     if (stat(argv[1], &file_info) == -1) {
-        perror("stat");
+        perror("Error: stat");
         return 1;
     }
 
     // print file info (name, type, permissions, uid, size)
+    
     printf("File: %s\n", argv[1]);
     printf("File type: %s\n", file_type(file_info.st_mode));
     print_permissions(file_info.st_mode);
     printf("Owner UID: %u\n", file_info.st_uid);
     printf("File size: %lld bytes\n", (long long)file_info.st_size);
 
-    // convert modification time to readable date
+    // convert last modification time to readable date and time
     char time_string[100];
     struct tm *modification_time = localtime(&file_info.st_mtime);
     if (modification_time != NULL) {

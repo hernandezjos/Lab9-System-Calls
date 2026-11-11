@@ -5,7 +5,7 @@
 * @file pmod.c
 * compile: Makefile
 ************************************/
-
+#define _DEFAULT_SOURCE
 #define _POSIX_C_SOURCE 200809L
 
 #include <stdio.h>
@@ -44,12 +44,12 @@ int main(int argc, char* argv[])
             requested_time = remaining_time;
         }
         else {
-            perror("nanosleep");
+            perror("Error: nanosleep");
             return 1;
         }
     }
 
-    printf("Awake!\n");
+    printf("Goodbye..\n");
 
     return 0;
 }
