@@ -1,17 +1,23 @@
+CFLAGS=-c -g -Wall -Werror
 CC=gcc
-CFLAGS=-c -Wall
-LDFLAGS=
-SOURCES= info.c pinfo.c pmod.c finfo.c
-OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE= lab9
-all: $(EXECUTABLE)
-# Pull in dependency info for existing .o files
--include $(OBJECTS:.o=.d)
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
-.c.o:
-	$(CC) $(CFLAGS) $< -o $@
-	$(CC) -MM $< > $*.d
+
+all: info pinfo finfo pmod
+
+info: info.o
+	$(CC) -o info info.o
+
+pinfo: pinfo.o
+	$(CC) -o pinfo pinfo.o
+
+finfo: finfo.o
+	$(CC) -o finfo finfo.o
+
+pmod: pmod.o
+	$(CC) -o pmod pmod.o
+
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE) *.d
-.PHONY: all clean
+	rm -f *.o info pinfo finfo pmod
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ $<
+
