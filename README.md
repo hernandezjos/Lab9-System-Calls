@@ -1,6 +1,6 @@
-# Lab 9 - Linux System Calls
+# Lab 9 - System Calls
 
-Author: Your Name
+Author: Joseph Hernandez
 
 ## Description
 
